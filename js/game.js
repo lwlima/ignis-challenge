@@ -3,9 +3,11 @@ let tableGame = document.getElementById("game-table");
 let tableRound = document.getElementById("game-round");
 let tableRoundTemp;
 let tableGameTemp;
+let teamChampion;
 
 for(i = 0; i< teamList.length; i++){
     teamList[i] = teamList[i].trim().split(";");
+    teamList[i][2] = 0; //pontuação dos times
 }
 
 let teamListTemp = teamList;
@@ -52,11 +54,24 @@ function makeRound() {
     for(let round=1; round<=listLength; round++){
         tableRoundTemp = tableRound.innerHTML;
         tableRound.innerHTML = tableRoundTemp+"<li><h4> Rodada "+round+"</h4></li>";
+
         rotate(teamListTemp);
         for(i=0; i<stop; i++){
+            let scoreOne = randomResult();
+            let scoreTwo = randomResult();
             tableRoundTemp = tableRound.innerHTML;
             tableRound.innerHTML = tableRoundTemp+"<li>"+teamListTemp[i][0]+" vs "+teamListTemp[listLength-i][0]+" ("+teamListTemp[i][1]+")"+"</li>"
-            +"<li>"+randomResult()+" - "+randomResult()+"</li>";
+            +"<li>"+scoreOne+" - "+scoreTwo+"</li>";
+            if(scoreOne > scoreTwo){
+                teamListTemp[i][2] += 3;
+            }
+            else if(scoreTwo > scoreOne){
+                teamListTemp[listLength-i][2] += 3;
+            }
+            else{
+                teamListTemp[i][2] += 1;
+                teamListTemp[listLength-i][2] += 1;
+            }
         }
     }
     makeRoundInverse();
@@ -69,13 +84,41 @@ function makeRoundInverse() {
     for(let round=0; round<listLength; round++){
         let tableRoundTemp = tableRound.innerHTML;
         tableRound.innerHTML = tableRoundTemp+"<li><h4> Rodada "+(round+teamListTemp.length)+"</h4></li>";
+
         rotate(teamListTemp);
         for(i=0; i<stop; i++){
+            let scoreOne = randomResult();
+            let scoreTwo = randomResult();
             tableRoundTemp = tableRound.innerHTML;
             tableRound.innerHTML = tableRoundTemp+"<li>"+teamListTemp[listLength-i][0]+" vs "+teamListTemp[i][0]+" ("+teamListTemp[listLength-i][1]+")"+"</li>"
-            +"<li>"+randomResult()+" - "+randomResult()+"</li>";
+            +"<li>"+scoreOne+" - "+scoreTwo+"</li>";
+
+            if(scoreOne > scoreTwo){
+                teamListTemp[listLength-i][2] += 3;
+            }
+            else if(scoreTwo > scoreOne){
+                teamListTemp[i][2] += 3;
+            }
+            else {
+                teamListTemp[i][2] += 1;
+                teamListTemp[listLength-i][2] += 1;
+            }
         }
     }
+
+    champion();
+}
+
+function champion() {
+    let over = 0;
+    for(i=0; i<teamList.length; i++){
+        if(teamList[i][2] > over){
+            over = teamList[i][2];
+            teamChampion = teamList[i][0];
+        }
+    }
+
+    console.log("Campeão é o esporte clube "+ teamChampion);
 }
 
 function randomResult() {
