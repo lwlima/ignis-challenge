@@ -1,6 +1,7 @@
 let teamList = document.getElementById("data").value.split("\n");
 let tableGame = document.getElementById("game-table");
 let tableRound = document.getElementById("game-round");
+let championDiv = document.getElementById("champion");
 let tableRoundTemp;
 let tableGameTemp;
 let teamChampion;
@@ -10,9 +11,8 @@ for(i = 0; i< teamList.length; i++){
     teamList[i][2] = 0; //pontuação dos times
 }
 
-let teamListTemp = teamList;
-let listLength = teamListTemp.length-1;
-let stop = teamListTemp.length/2;
+let listLength = teamList.length-1;
+let stop = teamList.length/2;
 
 makeTable();
 makeRound();
@@ -23,10 +23,10 @@ function makeTable() {
     for(let round=1; round<=listLength; round++){
         tableGameTemp = tableGame.innerHTML;
         tableGame.innerHTML = tableGameTemp+"<li><h4> Rodada "+round+"</h4></li>";
-        rotate(teamListTemp);
+        rotate(teamList);
         for(i=0; i<stop; i++){
             tableGameTemp = tableGame.innerHTML;
-            tableGame.innerHTML = tableGameTemp+"<li>"+teamListTemp[i][0]+" vs "+teamListTemp[listLength-i][0]+" ("+teamListTemp[i][1]+")"+"</li>";
+            tableGame.innerHTML = tableGameTemp+"<li>"+teamList[i][0]+" vs "+teamList[listLength-i][0]+" ("+teamList[i][1]+")"+"</li>";
         }
     }
     makeTableInverse();
@@ -38,11 +38,11 @@ function makeTableInverse() {
 
     for(let round=0; round<listLength; round++){
         tableGameTemp = tableGame.innerHTML;
-        tableGame.innerHTML = tableGameTemp+"<li><h4> Rodada "+(round+teamListTemp.length)+"</h4></li>";
-        rotate(teamListTemp);
+        tableGame.innerHTML = tableGameTemp+"<li><h4> Rodada "+(round+teamList.length)+"</h4></li>";
+        rotate(teamList);
         for(i=0; i<stop; i++){
             tableGameTemp = tableGame.innerHTML;
-            tableGame.innerHTML = tableGameTemp+"<li>"+teamListTemp[listLength-i][0]+" vs "+teamListTemp[i][0]+" ("+teamListTemp[listLength-i][1]+")"+"</li>";
+            tableGame.innerHTML = tableGameTemp+"<li>"+teamList[listLength-i][0]+" vs "+teamList[i][0]+" ("+teamList[listLength-i][1]+")"+"</li>";
         }
     }
 }
@@ -55,23 +55,15 @@ function makeRound() {
         tableRoundTemp = tableRound.innerHTML;
         tableRound.innerHTML = tableRoundTemp+"<li><h4> Rodada "+round+"</h4></li>";
 
-        rotate(teamListTemp);
+        rotate(teamList);
         for(i=0; i<stop; i++){
             let scoreOne = randomResult();
             let scoreTwo = randomResult();
             tableRoundTemp = tableRound.innerHTML;
-            tableRound.innerHTML = tableRoundTemp+"<li>"+teamListTemp[i][0]+" vs "+teamListTemp[listLength-i][0]+" ("+teamListTemp[i][1]+")"+"</li>"
+            tableRound.innerHTML = tableRoundTemp+"<li>"+teamList[i][0]+" vs "+teamList[listLength-i][0]+" ("+teamList[i][1]+")"+"</li>"
             +"<li>"+scoreOne+" - "+scoreTwo+"</li>";
-            if(scoreOne > scoreTwo){
-                teamListTemp[i][2] += 3;
-            }
-            else if(scoreTwo > scoreOne){
-                teamListTemp[listLength-i][2] += 3;
-            }
-            else{
-                teamListTemp[i][2] += 1;
-                teamListTemp[listLength-i][2] += 1;
-            }
+
+            scoreBoard(scoreOne, scoreTwo, false);
         }
     }
     makeRoundInverse();
@@ -83,30 +75,47 @@ function makeRoundInverse() {
 
     for(let round=0; round<listLength; round++){
         let tableRoundTemp = tableRound.innerHTML;
-        tableRound.innerHTML = tableRoundTemp+"<li><h4> Rodada "+(round+teamListTemp.length)+"</h4></li>";
+        tableRound.innerHTML = tableRoundTemp+"<li><h4> Rodada "+(round+teamList.length)+"</h4></li>";
 
-        rotate(teamListTemp);
+        rotate(teamList);
         for(i=0; i<stop; i++){
             let scoreOne = randomResult();
             let scoreTwo = randomResult();
             tableRoundTemp = tableRound.innerHTML;
-            tableRound.innerHTML = tableRoundTemp+"<li>"+teamListTemp[listLength-i][0]+" vs "+teamListTemp[i][0]+" ("+teamListTemp[listLength-i][1]+")"+"</li>"
+            tableRound.innerHTML = tableRoundTemp+"<li>"+teamList[listLength-i][0]+" vs "+teamList[i][0]+" ("+teamList[listLength-i][1]+")"+"</li>"
             +"<li>"+scoreOne+" - "+scoreTwo+"</li>";
 
-            if(scoreOne > scoreTwo){
-                teamListTemp[listLength-i][2] += 3;
-            }
-            else if(scoreTwo > scoreOne){
-                teamListTemp[i][2] += 3;
-            }
-            else {
-                teamListTemp[i][2] += 1;
-                teamListTemp[listLength-i][2] += 1;
-            }
+            scoreBoard(scoreOne, scoreTwo, true);
         }
     }
 
     champion();
+}
+
+function scoreBoard(scoreOne, scoreTwo, inverse) {
+    if(inverse === true){
+        if(scoreOne > scoreTwo){
+            teamList[listLength-i][2] += 3;
+        }
+        else if(scoreTwo > scoreOne){
+            teamList[i][2] += 3;
+        }
+        else {
+            teamList[i][2] += 1;
+            teamList[listLength-i][2] += 1;
+        }
+    } else {
+        if(scoreOne > scoreTwo){
+            teamList[i][2] += 3;
+        }
+        else if(scoreTwo > scoreOne){
+            teamList[listLength-i][2] += 3;
+        }
+        else{
+            teamList[i][2] += 1;
+            teamList[listLength-i][2] += 1;
+        }
+    }
 }
 
 function champion() {
@@ -118,7 +127,7 @@ function champion() {
         }
     }
 
-    console.log("Campeão é o esporte clube "+ teamChampion);
+    championDiv.innerHTML = "<h1>"+teamChampion+" É CAMPEÃO</h1>";
 }
 
 function randomResult() {
