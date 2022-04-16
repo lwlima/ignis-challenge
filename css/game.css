@@ -1,0 +1,8 @@
+#game ul {
+    margin: 0;
+    padding: 0;
+}
+
+#game ul li {
+    list-style-type: none;
+}
