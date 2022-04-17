@@ -26,7 +26,9 @@ function makeTable() {
         rotate(teamList);
         for(i=0; i<stop; i++){
             tableGameTemp = tableGame.innerHTML;
-            tableGame.innerHTML = tableGameTemp+"<li>"+teamList[i][0]+" vs "+teamList[listLength-i][0]+" ("+teamList[i][1]+")"+"</li>";
+            tableGame.innerHTML = `${tableGameTemp} <li><img src="img/${teamList[i][0]}.svg" width="35px alt="Esporte Clube 
+            ${teamList[i][0]}"> ${teamList[i][0]} vs ${teamList[listLength-i][0]} <img src="img/${teamList[listLength-i][0]}.svg" 
+            width="35px" alt="Esporte Clube ${teamList[listLength-i][0]}"> - ${teamList[i][1]}</li>`
         }
     }
     makeTableInverse();
@@ -42,7 +44,9 @@ function makeTableInverse() {
         rotate(teamList);
         for(i=0; i<stop; i++){
             tableGameTemp = tableGame.innerHTML;
-            tableGame.innerHTML = tableGameTemp+"<li>"+teamList[listLength-i][0]+" vs "+teamList[i][0]+" ("+teamList[listLength-i][1]+")"+"</li>";
+            tableGame.innerHTML = `${tableGameTemp} <li><img src="img/${teamList[listLength-i][0]}.svg" width="35px alt="Esporte Clube 
+            ${teamList[listLength-i][0]}"> ${teamList[listLength-i][0]} vs ${teamList[i][0]} <img src="img/${teamList[i][0]}.svg" 
+            width="35px" alt="Esporte Clube ${teamList[i][0]}"> - ${teamList[listLength-i][1]}</li>`
         }
     }
 }
@@ -60,8 +64,10 @@ function makeRound() {
             let scoreOne = randomResult();
             let scoreTwo = randomResult();
             tableRoundTemp = tableRound.innerHTML;
-            tableRound.innerHTML = tableRoundTemp+"<li>"+teamList[i][0]+" vs "+teamList[listLength-i][0]+" ("+teamList[i][1]+")"+"</li>"
-            +"<li>"+scoreOne+" - "+scoreTwo+"</li>";
+
+            tableRound.innerHTML = `${tableRoundTemp} <li><img src="img/${teamList[i][0]}.svg" width="35px alt="Esporte Clube 
+            ${teamList[i][0]}"> ${teamList[i][0]} ${scoreOne} - ${scoreTwo} ${teamList[listLength-i][0]} <img src="img/${teamList[listLength-i][0]}.svg" 
+            width="35px" alt="Esporte Clube ${teamList[listLength-i][0]}"> - ${teamList[i][1]}</li>`
 
             scoreBoard(scoreOne, scoreTwo, false);
         }
@@ -82,8 +88,10 @@ function makeRoundInverse() {
             let scoreOne = randomResult();
             let scoreTwo = randomResult();
             tableRoundTemp = tableRound.innerHTML;
-            tableRound.innerHTML = tableRoundTemp+"<li>"+teamList[listLength-i][0]+" vs "+teamList[i][0]+" ("+teamList[listLength-i][1]+")"+"</li>"
-            +"<li>"+scoreOne+" - "+scoreTwo+"</li>";
+
+            tableRound.innerHTML = `${tableRoundTemp} <li><img src="img/${teamList[listLength-i][0]}.svg" width="35px alt="Esporte Clube 
+            ${teamList[listLength-i][0]}"> ${teamList[listLength-i][0]} ${scoreOne} - ${scoreTwo} ${teamList[i][0]} <img src="img/${teamList[i][0]}.svg" 
+            width="35px" alt="Esporte Clube ${teamList[i][0]}"> - ${teamList[listLength-i][1]}</li>`
 
             scoreBoard(scoreOne, scoreTwo, true);
         }
@@ -127,7 +135,8 @@ function champion() {
         }
     }
 
-    championDiv.innerHTML = "<h1>"+teamChampion+" É CAMPEÃO</h1>";
+    championDiv.innerHTML = `<img width="100px" src="img/${teamChampion}.svg" alt="Esporte Clube ${teamChampion}"><h1><img style="display: inline-block;" width="100px" src="img/trofeu.png" alt="trofeu"> ${teamChampion} É CAMPEÃO 
+    <img style="display: inline-block;" width="100px" src="img/trofeu.png" alt="trofeu"></h1>`;
 }
 
 function randomResult() {
