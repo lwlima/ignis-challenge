@@ -28,16 +28,17 @@
                 </div>
                 <div class="col-12">
                     <h1>Campeonato de Futebol Ignis</h1>
-                    <textarea type="text" cols="50" rows="8" id="data">
-                        Vasco;Rio de Janeiro
-                        Flamengo;Rio de Janeiro
-                        Palmeiras;São Paulo
-                        Santos;São Paulo
-                        Cruzeiro;Minas Gerais
-                        Internacional;Rio Grande do Sul</textarea>
+                    <textarea type="text" placeholder="modelo para entrada dos times: 
+Vasco;Rio de Janeiro
+Flamengo;Rio de Janeiro
+Palmeiras;São Paulo
+Santos;São Paulo
+Cruzeiro;Minas Gerais
+Internacional;Rio Grande do Sul" cols="60" rows="8" id="data"></textarea>
                 </div>
+                <div class="col-12" id="msg-error" class="danger"></div>
                 <div class="col-12">
-                    <button onclick="makeTable();">Iniciar Jogo</button>
+                    <button class="btn btn-primary" onclick="reset();">Iniciar Jogo</button>
                 </div>
 
                 <div class="col-12 col-md-6">

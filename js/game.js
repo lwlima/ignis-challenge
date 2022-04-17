@@ -7,29 +7,37 @@ let tableGameTemp;
 let teamChampion;
 let listLength;
 let stop;
+let msgError;
 
 function reset(){
     teamList = document.getElementById("data").value.split("\n");
     tableGame = document.getElementById("game-table");
     tableRound = document.getElementById("game-round");
     championDiv = document.getElementById("champion");
+    msgError = document.getElementById("msg-error");
 
-    for(i = 0; i< teamList.length; i++){
-        teamList[i] = teamList[i].trim().split(";");
-        teamList[i][2] = 0; //pontuação dos times
+
+    if(teamList.length === 1 && (teamList.Length%2 != 0)){
+        msgError.innerHTML = "Entrada de dados não pode ser vazia e impar";
+    }else{
+        msgError.innerHTML = "";    
+        for(i = 0; i< teamList.length; i++){
+            teamList[i] = teamList[i].trim().split(";");
+            teamList[i][2] = 0; //pontuação dos times
+        }
+
+        listLength = teamList.length-1;
+        stop = teamList.length/2;
+
+        tableGame.innerHTML = "";
+        tableRound.innerHTML = "";
+
+        makeTable();
     }
-
-    listLength = teamList.length-1;
-    stop = teamList.length/2;
-
-    tableGame.innerHTML = "";
-    tableRound.innerHTML = "";
 }
 
 // criando tabela de jogos de ida
 function makeTable() {
-    reset();
-
     let tableGameTemp = tableGame.innerHTML;
     tableGame.innerHTML = tableGameTemp+"<li><h3> Turno de ida </h3></li>";
     for(let round=1; round<=listLength; round++){
