@@ -162,7 +162,7 @@ function champion() {
         }
     }
 
-    championDiv.innerHTML = `<img width="100px" src="img/${teamChampion}.svg" alt="Esporte Clube ${teamChampion}"><h1><img style="display: inline-block;" width="100px" src="img/trofeu.png" alt="trofeu"> ${teamChampion} É CAMPEÃO 
+    championDiv.innerHTML = `<img width="90px" src="img/${teamChampion}.svg" alt="Esporte Clube ${teamChampion}"><h1><img style="display: inline-block;" width="90px" src="img/trofeu.png" alt="trofeu"> ${teamChampion} É CAMPEÃO 
     <img style="display: inline-block;" width="100px" src="img/trofeu.png" alt="trofeu"></h1>`;
 }
 
