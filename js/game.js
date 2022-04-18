@@ -18,7 +18,7 @@ function reset(){
 
 
     if(teamList.length === 1 && (teamList.Length%2 != 0)){
-        msgError.innerHTML = "Entrada de dados não pode ser vazia e impar";
+        msgError.innerHTML = `<div class="col-12 alert alert-danger mx-auto" role="alert">Entrada de dados não pode ser vazia e impar</div>`;
     }else{
         msgError.innerHTML = "";    
         for(i = 0; i< teamList.length; i++){
@@ -39,7 +39,7 @@ function reset(){
 // criando tabela de jogos de ida
 function makeTable() {
     let tableGameTemp = tableGame.innerHTML;
-    tableGame.innerHTML = tableGameTemp+"<li><h3> Turno de ida </h3></li>";
+    tableGame.innerHTML = `<li><h2>Tabela de jogos</h2></li> <li><h3> Turno de ida </h3></li>`;
     for(let round=1; round<=listLength; round++){
         tableGameTemp = tableGame.innerHTML;
         tableGame.innerHTML = tableGameTemp+"<li><h4> Rodada "+round+"</h4></li>";
@@ -76,12 +76,12 @@ function makeTableInverse() {
 
 // criando os rounds de ida
 function makeRound() {
-    let tableRoundTemp = tableRound.innerHTML;
-    tableRound.innerHTML = tableRoundTemp+"<li><h3> Turno de ida </h3></li>";
+    tableRoundTemp = tableRound.innerHTML;
+    tableRound.innerHTML = `<li><h2>Tabela Resultados</h2></li><li><h3> Turno de ida </h3></li>`;
 
     for(let round=1; round<=listLength; round++){
         tableRoundTemp = tableRound.innerHTML;
-        tableRound.innerHTML = tableRoundTemp+"<li><h4> Rodada "+round+"</h4></li>";
+        tableRound.innerHTML = `${tableRoundTemp} <li><h4> Rodada ${round}</h4></li>`;
 
         rotate(teamList);
         for(i=0; i<stop; i++){
@@ -101,12 +101,12 @@ function makeRound() {
 
 // criando os rounds de volta
 function makeRoundInverse() {
-    let tableRoundTemp = tableRound.innerHTML;
-    tableRound.innerHTML = tableRoundTemp+"<li><h3> Turno de volta </h3></li>";
+    tableRoundTemp = tableRound.innerHTML;
+    tableRound.innerHTML = `${tableRoundTemp} <li><h3> Turno de volta </h3></li>`;
 
     for(let round=0; round<listLength; round++){
         let tableRoundTemp = tableRound.innerHTML;
-        tableRound.innerHTML = tableRoundTemp+"<li><h4> Rodada "+(round+teamList.length)+"</h4></li>";
+        tableRound.innerHTML = `${tableRoundTemp}<li><h4> Rodada ${round+teamList.length}</h4></li>`;
 
         rotate(teamList);
         for(i=0; i<stop; i++){

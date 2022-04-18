@@ -6,3 +6,17 @@
 #game ul li {
     list-style-type: none;
 }
+
+#msg-error {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#champion {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.title {
+    margin-bottom: 1em;
+}
